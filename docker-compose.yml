@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+  postgresDB:
+    image: postgres
+    container_name: postgresDB
+    ports:
+      - 5432:5432
+    networks:
+      - db
+    environment:
+      POSTGRES_DB: news
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  app:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresDB
+    environment:
+      DB_HOST: postgresDB
+      DB_PORT: 5432
+      DATABASE: news
+      USERNAME: postgres
+      PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+    networks:
+      - db
+
+networks:
+  db:

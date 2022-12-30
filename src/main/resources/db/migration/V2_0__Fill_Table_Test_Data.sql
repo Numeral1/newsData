@@ -1,0 +1,1 @@
+COPY test_data(source, topic, news) FROM '/home/user/IdeaProjects/newsData/test_data.csv' DELIMITER ';' CSV HEADER;
